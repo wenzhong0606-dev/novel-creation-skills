@@ -18,6 +18,7 @@
 ## 当前文档
 
 - [通用小说创作 Skill 体系架构 V0.1](docs/architecture/novel-creation-skill-architecture-v0.1.md)
+- [通用 Skill 仓库与版本管理规范 V1.0](docs/governance/skill-repository-and-versioning-v1.0.md)
 
 ## 仓库治理原则
 
