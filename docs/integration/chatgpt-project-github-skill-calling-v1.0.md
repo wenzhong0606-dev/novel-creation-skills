@@ -1,7 +1,7 @@
 # ChatGPT Project—GitHub Skill 调用规范 V1.0
 
 - **文档编号：** NCS-INT-001
-- **文档版本：** 1.0.0
+- **文档版本：** 1.0.1
 - **状态：** 首版执行规范
 - **适用范围：** 使用 ChatGPT Web 版 Project 与 GitHub 仓库协同开展小说创作的项目
 - **上位文件：**《通用小说创作 Skill 体系架构 V0.1》《通用 Skill 仓库与版本管理规范 V1.0》
@@ -122,7 +122,7 @@ Project Instructions 只放长期稳定、跨聊天都需要遵守的规则，�
 5. ChatGPT Project 中的上传文件和聊天内容是工作上下文或快照；若与 GitHub 已确认版本冲突，必须指出冲突并核验，不得静默选择。
 
 二、每次新任务的启动要求
-1. 先恢复本小说当前状态，优先读取 PROJECT_STATE.md、PROJECT_SKILLS.md 和相关决策记录。
+1. 先恢复本小说当前状态，读取PROJECT_BOOTSTRAP.md、项目状态文件（PROJECT_STATE.md或等效文件，如CURRENT.md）、PROJECT_SKILLS.md和相关决策／ADR记录。
 2. 明确当前任务、已批准基线、未完成事项和禁止擅自变更的内容。
 3. 根据 PROJECT_SKILLS.md 选择本任务需要的 Skill。
 4. 按锁定的 commit SHA 读取对应 manifest.yaml、SKILL.md 及必要依赖。
@@ -156,9 +156,9 @@ Project Sources 中只保留少量稳定、常用的文件：
 | 文件 | 用途 | 是否建议常驻 |
 |---|---|---|
 | PROJECT_BOOTSTRAP.md | 项目入口、仓库地址、资料地图和启动顺序 | 是 |
-| PROJECT_STATE.md | 当前阶段、已完成工作、当前任务和待办 | 是 |
+| PROJECT_STATE.md或等效状态文件（如CURRENT.md） | 当前阶段、已完成工作、当前任务和待办 | 是 |
 | PROJECT_SKILLS.md | 本项目采用的 Skill 及版本锁定 | 是 |
-| DECISIONS.md | 已批准的关键决策及其状态 | 是 |
+| DECISIONS.md或等效ADR记录目录／索引 | 已批准的关键决策及其状态 | 是 |
 | 当前阶段核心规划 | 当前任务确实需要的规划基线 | 按阶段 |
 | 全部 Skill 仓库文件 | 通用能力全集 | 否 |
 | 全部小说正文与历史稿 | 全量历史资料 | 不建议全部常驻；按任务读取 |
@@ -174,17 +174,17 @@ Project Sources 中只保留少量稳定、常用的文件：
 | 文件 | 核心内容 |
 |---|---|
 | PROJECT_BOOTSTRAP.md | 项目身份、仓库位置、权威文件地图、启动步骤、协作约束 |
-| PROJECT_STATE.md | 当前阶段、已完成工作、正在进行的任务、阻塞项和下一步 |
+| PROJECT_STATE.md或等效状态文件（如CURRENT.md） | 当前阶段、已完成工作、正在进行的任务、阻塞项和下一步 |
 | PROJECT_SKILLS.md | 本项目启用的 Skill、版本、commit SHA、成熟度和适配配置 |
-| DECISIONS.md | 已批准决策、撤回决策、待批准事项及证据来源 |
+| DECISIONS.md或等效ADR记录目录／索引 | 已批准决策、撤回决策、待批准事项及证据来源 |
 
 这些文件应短而可导航，不复制整部小说或全部历史聊天。
 
-如果项目已经有等效的状态、决策或索引文件，不要求重复创建；只需在 PROJECT_BOOTSTRAP.md 中说明对应关系。
+如果项目已经有等效的状态、决策或索引文件，不要求重复创建；只需在 PROJECT_BOOTSTRAP.md 中说明对应关系。例如，《穿越》以CURRENT.md作为PROJECT_STATE.md的等效状态入口，以decisions/ADR-*.md作为DECISIONS.md的等效决策记录；不得另建重复文件。
 
 ### 4.1 项目状态记录最低字段
 
-PROJECT_STATE.md 至少说明：
+项目状态文件（PROJECT_STATE.md或等效文件，如CURRENT.md）至少说明：
 
 - 项目名称和当前项目基线版本。
 - 当前所处创作阶段。
@@ -274,9 +274,9 @@ PROJECT_STATE.md 至少说明：
 从小说项目仓库读取：
 
 1. PROJECT_BOOTSTRAP.md。
-2. PROJECT_STATE.md。
+2. 项目状态文件（PROJECT_STATE.md或等效文件，如CURRENT.md）。
 3. PROJECT_SKILLS.md。
-4. 与当前任务有关的 DECISIONS.md 条目。
+4. 与当前任务有关的DECISIONS.md条目或ADR记录。
 5. 当前任务涉及的规划、正文或评审材料。
 
 读取时优先使用明确文件路径和项目仓库；不要只搜索项目名称后凭搜索摘要推断项目状态。
@@ -523,7 +523,7 @@ PROJECT_STATE.md 至少说明：
 ~~~text
 请按《ChatGPT Project—GitHub Skill 调用规范》恢复本小说项目，不要立即开始实质创作。
 
-第一步：读取小说项目仓库的 PROJECT_BOOTSTRAP.md、PROJECT_STATE.md、PROJECT_SKILLS.md，以及当前任务涉及的决策记录和材料。
+第一步：读取小说项目仓库的PROJECT_BOOTSTRAP.md、项目状态文件（PROJECT_STATE.md或等效文件，如《穿越》的CURRENT.md）、PROJECT_SKILLS.md，以及当前任务涉及的ADR／决策记录和材料。
 
 第二步：根据 PROJECT_SKILLS.md，判断本次任务需要哪些工作流 Skill、专项能力和类型扩展包。
 
@@ -564,9 +564,9 @@ PROJECT_STATE.md 至少说明：
 - [ ] 当前 ChatGPT Project 与小说项目身份一致。
 - [ ] 小说项目仓库已确认。
 - [ ] PROJECT_BOOTSTRAP.md 已读取或已确认等效入口。
-- [ ] PROJECT_STATE.md 已读取。
+- [ ] 项目状态文件（PROJECT_STATE.md或等效文件，如CURRENT.md）已读取。
 - [ ] PROJECT_SKILLS.md 已读取。
-- [ ] 相关决策和任务材料已读取。
+- [ ] 相关决策和任务材料已读取（DECISIONS.md或等效ADR记录）。
 - [ ] 本次所需 Skill 已按需选择。
 - [ ] Skill 的 manifest.yaml 与 SKILL.md 来自同一锁定 commit。
 - [ ] 依赖版本已核验。
@@ -588,12 +588,11 @@ PROJECT_STATE.md 至少说明：
 
 三项基础交付物完成后，建议按以下顺序应用：
 
-1. 在每部小说的 ChatGPT Project 中配置稳定的 Project Instructions。
-2. 在小说项目仓库建立或确认 PROJECT_BOOTSTRAP.md、PROJECT_STATE.md、PROJECT_SKILLS.md 和 DECISIONS.md。
-3. 从通用 Skill 仓库中按需读取实际已开发的 Skill；尚未开发的能力不提前假装存在。
-4. 先在《穿越》项目中验证跨聊天恢复、Skill 加载收据、版本锁定和任务收尾流程。
-5. 根据实际执行问题修订本规范；验证稳定后，再复制到新小说项目。
-6. 后续新小说只需建立自己的 ChatGPT Project 和小说项目仓库，按本规范引用已验证的通用 Skill，不必重新建设整套协作机制。
+1. 在当前《穿越》ChatGPT Project中维护稳定的Project Instructions。
+2. 在《穿越》仓库中使用既有的PROJECT_BOOTSTRAP.md、CURRENT.md、PROJECT_SKILLS.md和decisions/ADR-*.md；等效文件已存在时不重复创建。
+3. 从通用Skill仓库按需读取实际已开发、已锁定的Skill；尚未开发的能力不提前假装存在。
+4. 先在《穿越》项目中验证跨聊天恢复、Skill加载收据、版本锁定和任务收尾流程，并根据真实任务改进。
+5. 只有未来出现其他小说项目及明确复用需求时，才评估复制配置和跨项目验证；当前不创建第二个项目，也不把该步骤列为待办。
 
 ---
 
